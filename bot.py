@@ -16,9 +16,9 @@ logging.basicConfig(
 
 # Конфигурация
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-VLLM_BASE_URL = os.getenv('VLLM_BASE_URL', 'http://localhost:8555/v1')
+VLLM_BASE_URL = os.getenv('VLLM_BASE_URL', 'http://localhost:8095/v1')
 VLLM_API_KEY = os.getenv('VLLM_API_KEY', 'EMPTY')
-VLLM_MODEL = os.getenv('VLLM_MODEL', 'Qwen/Qwen3-14b')
+VLLM_MODEL = os.getenv('VLLM_MODEL', 'Lyntas/mininggpt_7b_instruct_v4')
 
 if not TELEGRAM_BOT_TOKEN:
     raise ValueError("TELEGRAM_BOT_TOKEN environment variable is required")
@@ -48,7 +48,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             ],
             temperature=0.7,
             max_tokens=512,
-            extra_body={"chat_template_kwargs": {"enable_thinking": False}}
+
         )
         
         ai_response = response.choices[0].message.content.strip()
